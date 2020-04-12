@@ -50,15 +50,15 @@ def position(player,board):
 def is_winner(player,board,win):
     win = False
     if win == False:
-        if check_row(player,board,win) == False:
-            if check_col(player,board,win) == False:
-                if check_diag(player,board,win) == False:
+        if check_row(player,board) == False:
+            if check_col(player,board) == False:
+                if check_diag(player,board) == False:
                     return False
     else:
         return True
             
 #check_row function checks the rows for a winner
-def check_row(player,board,win):    
+def check_row(player,board):    
         for row in board:
             if row[0] != '0' and row[0] == row[1] and row[1] == row[2]:
                 print('Player', player, 'wins!')
@@ -67,7 +67,7 @@ def check_row(player,board,win):
                 return False
 
 #check_col function checks the columns for a winner        
-def check_col(player,board,win):
+def check_col(player,board):
     if (board[0][0] != '0' and board[0][0] == board[1][0] and board[1][0] == board[2][0]) \
         or (board[0][1] != '0' and board[0][1] == board[1][1] and board[1][1] == board[2][1]) \
         or (board[0][2] != '0' and board[0][2] == board[1][2] and board[1][2] == board[2][2]):
@@ -77,7 +77,7 @@ def check_col(player,board,win):
         return False
 
 #check_diag function checks both diagonals for a winner
-def check_diag(player,board,win):
+def check_diag(player,board):
     if (board[0][0] != '0' and board[0][0] == board[1][1] and board[0][0] == board[2][2])\
        or (board[0][2] != '0' and board[0][2] == board[1][1] and board[0][2] == board[2][0]):
         print('Player', player, 'wins!')
