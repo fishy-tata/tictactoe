@@ -1,3 +1,8 @@
+# This (import sys) allows to use the sys.exit() function that basically terminates the program. 
+# You have a lot of talent and did a great job! 
+# Fer
+import sys
+
 # main function creates the board and calls helper functions
 def main():
     board = [
@@ -18,21 +23,25 @@ def main():
 def switches_and_tie(board):
     x = 'x'
     o = 'o'
-    i = 0
+    i = 1
     win = False
-    while i < 9 and win == False:
-        if i < 9 and win == False:
-            position(x,board)
+    player = ''
+    while i <= 10 and win != True:
+        if i % 2 == 0:
+            player = o
+        if i % 2 != 0:
+            player = x
+        if is_winner(player,board,win) != False:     
+            win = True
+            print('Player', player, 'wins!')
+            sys.exit()
+        if i < 10 and is_winner(player,board,win) == False:
+            position(player,board)
             i += 1
-        if i < 9 and is_winner(x,board,win) == False:     
-                position(o,board)
-                i += 1
-                is_winner(o,board,win)
-        elif i >= 9:
+        elif i == 10:
+            i += 1
             print('Tie.')
-        elif win == True:
             break
-    
 
 #position function gets row and column position of the x or o
 def position(player,board):
@@ -61,7 +70,6 @@ def is_winner(player,board,win):
 def check_row(player,board):    
         for row in board:
             if row[0] != '0' and row[0] == row[1] and row[1] == row[2]:
-                print('Player', player, 'wins!')
                 return True
             else:
                 return False
@@ -71,7 +79,6 @@ def check_col(player,board):
     if (board[0][0] != '0' and board[0][0] == board[1][0] and board[1][0] == board[2][0]) \
         or (board[0][1] != '0' and board[0][1] == board[1][1] and board[1][1] == board[2][1]) \
         or (board[0][2] != '0' and board[0][2] == board[1][2] and board[1][2] == board[2][2]):
-        print('Player', player, 'wins!')
         return True            
     else:
         return False
@@ -80,7 +87,6 @@ def check_col(player,board):
 def check_diag(player,board):
     if (board[0][0] != '0' and board[0][0] == board[1][1] and board[0][0] == board[2][2])\
        or (board[0][2] != '0' and board[0][2] == board[1][1] and board[0][2] == board[2][0]):
-        print('Player', player, 'wins!')
         return True
     else:
         return False
