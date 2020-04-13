@@ -1,7 +1,6 @@
 # This (import sys) allows to use the sys.exit() function that basically terminates the program. 
 # You have a lot of talent and did a great job! 
 # Fer
-import sys
 
 # main function creates the board and calls helper functions
 def main():
@@ -26,15 +25,19 @@ def switches_and_tie(board):
     i = 1
     win = False
     player = ''
+    winner = ''
     while i <= 10 and win != True:
         if i % 2 == 0:
             player = o
         if i % 2 != 0:
             player = x
         if is_winner(player,board,win) != False:     
+            if player == x:
+                winner = o
+            elif player == o:
+                winner = x
             win = True
-            print('Player', player, 'wins!')
-            sys.exit()
+            print('Player', winner, 'wins!')
         if i < 10 and is_winner(player,board,win) == False:
             position(player,board)
             i += 1
